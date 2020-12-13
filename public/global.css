@@ -130,3 +130,8 @@ table {
 .cf:after {
    clear: both;
 }
+
+body {
+   overflow: hidden;
+   background-color: #f5f5f5;
+}
