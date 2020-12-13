@@ -49,3 +49,7 @@
 </div>
 
 <svelte:window on:keydown={handleKeydown} />
+
+<svelte:head>
+   <title>Slide {$currentSlide}</title>
+</svelte:head>

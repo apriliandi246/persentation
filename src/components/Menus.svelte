@@ -18,7 +18,7 @@
       top: 0;
       padding: 10px;
       margin-top: 20px;
-      margin-left: 25px;
+      margin-left: 30px;
       position: absolute;
       text-align: center;
       transition: padding-left 0.2s;
@@ -62,7 +62,6 @@
    }
 
    .toggle-menu__trigger:checked ~ .toggle-menu__block:nth-child(2) {
-      background-color: #000000;
       transform: rotate(45deg) translate(1px, -1px);
    }
 
@@ -72,7 +71,6 @@
    }
 
    .toggle-menu__trigger:checked ~ .toggle-menu__block:nth-child(4) {
-      background-color: #000000;
       transform: rotate(-45deg) translate(-1px, 1px);
    }
 
@@ -84,27 +82,11 @@
       top: 0;
       left: 0;
       width: 250px;
-      margin-top: 90px;
-      margin-left: 60px;
+      margin-top: 80px;
+      margin-left: 30px;
       position: absolute;
       border-radius: 2px;
       box-shadow: 0 0 1px 1px #0000001a;
-   }
-
-   .menus__button {
-      width: 100%;
-      border: none;
-      outline: none;
-      padding: 10px;
-      color: #000000;
-      cursor: pointer;
-      font-size: 1.8rem;
-      text-align: center;
-      letter-spacing: 1px;
-      box-sizing: border-box;
-      font-family: system-ui;
-      background-color: #fafafa;
-      transition: color 0.2s, background-color 0.2s;
    }
 
    .menus__current-slide {
@@ -143,8 +125,7 @@
       font-family: system-ui;
    }
 
-   select:hover,
-   .menus__button:hover {
+   select:hover {
       background-color: #f7efef;
    }
 </style>
@@ -166,7 +147,6 @@
       class="menus"
       in:scale={{ duration: 300 }}
       out:scale={{ duration: 300 }}>
-      <button class="menus__button">🌝</button>
       <p class="menus__current-slide">Current slide : {$currentSlide}</p>
 
       <!-- svelte-ignore a11y-no-onchange -->
