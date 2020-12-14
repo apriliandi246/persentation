@@ -3,6 +3,7 @@
    import One from "./slides/one.svelte";
    import Two from "./slides/two.svelte";
    import Three from "./slides/three.svelte";
+   import Four from "./slides/four.svelte";
    import Menus from "./components/Menus.svelte";
 
    function handleKeydown(event) {
@@ -45,6 +46,8 @@
       <Two />
    {:else if $currentSlide === 3}
       <Three />
+   {:else if $currentSlide === 4}
+      <Four />
    {/if}
 </div>
 

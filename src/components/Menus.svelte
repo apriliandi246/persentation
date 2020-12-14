@@ -16,6 +16,7 @@
 <style>
    .menu-toggle {
       top: 0;
+      z-index: 99;
       padding: 10px;
       margin-top: 20px;
       margin-left: 30px;
@@ -81,6 +82,7 @@
    .menus {
       top: 0;
       left: 0;
+      z-index: 99;
       width: 250px;
       margin-top: 80px;
       margin-left: 30px;

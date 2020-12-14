@@ -1,11 +1,12 @@
 <script>
-   import { scale } from "svelte/transition";
+   import { scale, fly } from "svelte/transition";
 </script>
 
 <style>
    div {
       margin-top: -14px;
       text-align: center;
+      position: absolute;
    }
 
    img {
@@ -22,7 +23,9 @@
    }
 </style>
 
-<div in:scale={{ duration: 400 }}>
-   <img src="https://v3.vuejs.org/logo.png" alt="reactjs" />
+<div
+   in:fly|local={{ x: 900, duration: 500 }}
+   out:fly|local={{ x: -900, duration: 400 }}>
+   <img src="https://v3.vuejs.org/logo.png" alt="vuejs" />
    <p>The Progressive JavaScript Framework</p>
 </div>

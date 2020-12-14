@@ -1,11 +1,16 @@
 <script>
-   import { scale } from "svelte/transition";
+   import { fly } from "svelte/transition";
 </script>
 
 <style>
+   div {
+      margin-top: -14px;
+      text-align: center;
+      position: absolute;
+   }
+
    img {
-      width: 90%;
-      max-height: 100%;
+      width: 50%;
       margin-bottom: 20px;
    }
 
@@ -19,14 +24,11 @@
       letter-spacing: 1.4px;
       font-family: system-ui;
    }
-
-   div {
-      margin-top: -14px;
-      text-align: center;
-   }
 </style>
 
-<div in:scale={{ duration: 400 }}>
+<div
+   in:fly|local={{ x: 900, duration: 500 }}
+   out:fly|local={{ x: -900, duration: 300 }}>
    <img
       src="https://raw.githubusercontent.com/sveltejs/branding/master/svelte-horizontal.png"
       alt="sveltejs" />
@@ -34,8 +36,6 @@
       Svelte is a radical new approach to building user interfaces. Whereas
       traditional frameworks like React and Vue do the bulk of their work in the
       browser, Svelte shifts that work into a compile step that happens when you
-      build your app. Instead of using techniques like virtual DOM diffing,
-      Svelte writes code that surgically updates the DOM when the state of your
-      app changes.
+      build your app
    </p>
 </div>
