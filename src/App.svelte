@@ -6,15 +6,11 @@
    import Four from "./slides/four.svelte";
    import Menus from "./components/Menus.svelte";
 
-   function handleKeydown(event) {
-      console.log(event.key);
-      if (event.key === "ArrowRight" && $currentSlide !== $slides.length) {
-         $currentSlide++;
-      }
+   function changeSlide(event) {
+      if (event.key === "ArrowRight" && $currentSlide !== $slides.length)
+         $currentSlide += 1;
 
-      if (event.key === "ArrowLeft" && $currentSlide !== 1) {
-         $currentSlide--;
-      }
+      if (event.key === "ArrowLeft" && $currentSlide !== 1) $currentSlide -= 1;
    }
 </script>
 
@@ -35,17 +31,23 @@
 <div class="container">
    {#if $currentSlide === 1}
       <One />
-   {:else if $currentSlide === 2}
+   {/if}
+
+   {#if $currentSlide === 2}
       <Two />
-   {:else if $currentSlide === 3}
+   {/if}
+
+   {#if $currentSlide === 3}
       <Three />
-   {:else if $currentSlide === 4}
+   {/if}
+
+   {#if $currentSlide === 4}
       <Four />
    {/if}
 </div>
 
-<svelte:window on:keydown={handleKeydown} />
-
 <svelte:head>
    <title>Slide {$currentSlide}</title>
 </svelte:head>
+
+<svelte:body on:keydown={changeSlide} />
