@@ -22,8 +22,14 @@
       margin-left: 30px;
       position: absolute;
       text-align: center;
-      transition: padding-left 0.2s;
+      border-radius: 3px;
+      background-color: #fafafa;
       box-shadow: 0 0 1.3px 1.3px #0000001a;
+      transition: padding-left 0.2s, transform 0.2s;
+   }
+
+   .menu-toggle:hover {
+      transform: scale(1.08);
    }
 
    .toggle-menu {
@@ -51,7 +57,7 @@
       height: 3px;
       display: block;
       transition: all 0.3s;
-      background-color: #000000;
+      background-color: #3b3737;
    }
 
    .toggle-menu__block:nth-child(2) {
@@ -76,7 +82,7 @@
    }
 
    .pl {
-      padding-left: 17px;
+      padding-left: 18.5px;
    }
 
    .menus {
@@ -87,7 +93,7 @@
       margin-top: 80px;
       margin-left: 30px;
       position: absolute;
-      border-radius: 2px;
+      border-radius: 3px;
       box-shadow: 0 0 1px 1px #0000001a;
    }
 
@@ -136,8 +142,9 @@
    <div class="toggle-menu">
       <input
          type="checkbox"
-         class="toggle-menu__trigger"
-         on:change={handleToggle} />
+         on:change={handleToggle}
+         class="toggle-menu__trigger" />
+
       <span class="toggle-menu__block" />
       <span class="toggle-menu__block" />
       <span class="toggle-menu__block" />
@@ -154,6 +161,7 @@
       <!-- svelte-ignore a11y-no-onchange -->
       <select on:change={chooseSlide}>
          <option selected hidden>Choose Your Slide</option>
+
          {#each $slides as slide}
             <option value={slide}>Slide {slide}</option>
          {/each}
