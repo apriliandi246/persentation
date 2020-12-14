@@ -7,19 +7,12 @@
    import Menus from "./components/Menus.svelte";
 
    function handleKeydown(event) {
-      if (event.key === "ArrowDown" && $currentSlide !== $slides.length) {
-         $currentSlide++;
-      }
-
+      console.log(event.key);
       if (event.key === "ArrowRight" && $currentSlide !== $slides.length) {
          $currentSlide++;
       }
 
       if (event.key === "ArrowLeft" && $currentSlide !== 1) {
-         $currentSlide--;
-      }
-
-      if (event.key === "ArrowUp" && $currentSlide !== 1) {
          $currentSlide--;
       }
    }
