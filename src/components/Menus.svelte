@@ -1,6 +1,6 @@
 <script>
    import { scale } from "svelte/transition";
-   import { currentSlide, slides } from "../store/store.js";
+   import { currentSlide, slides } from "../store/slide.js";
 
    let showMenus = false;
 
@@ -26,10 +26,6 @@
       background-color: #fafafa;
       box-shadow: 0 0 1.3px 1.3px #0000001a;
       transition: padding-left 0.2s, transform 0.2s;
-   }
-
-   .menu-toggle:hover {
-      transform: scale(1.08);
    }
 
    .toggle-menu {
@@ -135,6 +131,10 @@
 
    select:hover {
       background-color: #f7efef;
+   }
+
+   .menu-toggle:hover {
+      transform: scale(1.08);
    }
 </style>
 
