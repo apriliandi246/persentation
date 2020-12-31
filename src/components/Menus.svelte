@@ -1,6 +1,7 @@
 <script>
+   import slides from "../slide";
+   import { currentSlide } from "../store";
    import { scale } from "svelte/transition";
-   import { currentSlide, slides } from "../store/slide.js";
 
    let showMenus = false;
 
@@ -77,7 +78,7 @@
       transform: rotate(-45deg) translate(-1px, 1px);
    }
 
-   .pl {
+   .space {
       padding-left: 18.5px;
    }
 
@@ -136,9 +137,14 @@
    .menu-toggle:hover {
       transform: scale(1.08);
    }
+
+   .curSlide {
+      font-weight: bold;
+      background-color: #d8d2c9;
+   }
 </style>
 
-<div class="menu-toggle" class:pl={showMenus === true}>
+<div class="menu-toggle" class:space={showMenus === true}>
    <div class="toggle-menu">
       <input
          type="checkbox"
@@ -162,8 +168,13 @@
       <select on:change={chooseSlide}>
          <option selected hidden>Choose Your Slide</option>
 
-         {#each $slides as slide}
-            <option value={slide}>Slide {slide}</option>
+         {#each slides as slide}
+            <option
+               value={slide.id}
+               class:curSlide={slide.id === $currentSlide}>
+               Slide
+               {slide.id}
+            </option>
          {/each}
       </select>
    </div>

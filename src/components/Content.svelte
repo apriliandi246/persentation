@@ -1,9 +1,8 @@
 <script>
-   import { currentSlide } from "../store/slide.js";
-   import One from "../slides/one.svelte";
-   import Two from "../slides/two.svelte";
-   import Three from "../slides/three.svelte";
-   import Four from "../slides/four.svelte";
+   import slides from "../slide";
+   import { currentSlide } from "../store";
+
+   $: content = slides[$currentSlide - 1].slide;
 </script>
 
 <style>
@@ -19,19 +18,5 @@
 </style>
 
 <div class="container">
-   {#if $currentSlide === 1}
-      <One />
-   {/if}
-
-   {#if $currentSlide === 2}
-      <Two />
-   {/if}
-
-   {#if $currentSlide === 3}
-      <Three />
-   {/if}
-
-   {#if $currentSlide === 4}
-      <Four />
-   {/if}
+   <svelte:component this={content} />
 </div>

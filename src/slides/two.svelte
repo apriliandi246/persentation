@@ -25,8 +25,6 @@
 <div
    in:fly|local={{ x: 900, duration: 500 }}
    out:fly|local={{ x: -900, duration: 400 }}>
-   <img
-      src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
-      alt="reactjs" />
+   <img src="/img/react.png" alt="reactjs" />
    <p>A JavaScript library for building user interfaces</p>
 </div>

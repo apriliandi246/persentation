@@ -29,9 +29,7 @@
 <div
    in:fly|local={{ x: 900, duration: 500 }}
    out:fly|local={{ x: -900, duration: 300 }}>
-   <img
-      src="https://raw.githubusercontent.com/sveltejs/branding/master/svelte-horizontal.png"
-      alt="sveltejs" />
+   <img src="/img/svelte.png" alt="sveltejs" />
    <p>
       Svelte is a radical new approach to building user interfaces. Whereas
       traditional frameworks like React and Vue do the bulk of their work in the
