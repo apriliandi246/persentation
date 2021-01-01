@@ -1,5 +1,5 @@
 <script>
-   import slides from "../slide";
+   import slides from "../slide/slides";
    import { currentSlide } from "../store";
 
    $: content = slides[$currentSlide - 1].slide;

@@ -1,11 +1,11 @@
 <script>
-   import slides from "../slide";
+   import slides from "../slide/slides";
    import { currentSlide } from "../store";
    import { scale } from "svelte/transition";
 
    let showMenus = false;
 
-   function handleToggle() {
+   function toogleMenu() {
       showMenus = !showMenus;
    }
 
@@ -25,8 +25,8 @@
       text-align: center;
       border-radius: 3px;
       background-color: #fafafa;
+      transition: padding-left 0.2s;
       box-shadow: 0 0 1.3px 1.3px #0000001a;
-      transition: padding-left 0.2s, transform 0.2s;
    }
 
    .toggle-menu {
@@ -94,20 +94,6 @@
       box-shadow: 0 0 1px 1px #0000001a;
    }
 
-   .menus__current-slide {
-      width: 100%;
-      border: none;
-      outline: none;
-      padding: 10px;
-      color: #000000;
-      font-size: 1rem;
-      text-align: left;
-      letter-spacing: 1.2px;
-      box-sizing: border-box;
-      font-family: system-ui;
-      background-color: #fafafa;
-   }
-
    select {
       width: 100%;
       border: none;
@@ -134,10 +120,6 @@
       background-color: #f7efef;
    }
 
-   .menu-toggle:hover {
-      transform: scale(1.08);
-   }
-
    .curSlide {
       font-weight: bold;
       background-color: #d8d2c9;
@@ -148,7 +130,7 @@
    <div class="toggle-menu">
       <input
          type="checkbox"
-         on:change={handleToggle}
+         on:change={toogleMenu}
          class="toggle-menu__trigger" />
 
       <span class="toggle-menu__block" />
@@ -162,14 +144,13 @@
       class="menus"
       in:scale={{ duration: 300 }}
       out:scale={{ duration: 300 }}>
-      <p class="menus__current-slide">Current slide : {$currentSlide}</p>
-
       <!-- svelte-ignore a11y-no-onchange -->
       <select on:change={chooseSlide}>
          <option selected hidden>Choose Your Slide</option>
 
          {#each slides as slide}
             <option
+               selected={slide.id === $currentSlide}
                value={slide.id}
                class:curSlide={slide.id === $currentSlide}>
                Slide

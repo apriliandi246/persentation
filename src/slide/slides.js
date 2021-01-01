@@ -1,7 +1,7 @@
-import One from "./slides/one.svelte";
-import Two from "./slides/two.svelte";
-import Three from "./slides/three.svelte";
-import Four from "./slides/four.svelte";
+import One from "../contents/one.svelte";
+import Two from "../contents/two.svelte";
+import Three from "../contents/three.svelte";
+import Four from "../contents/four.svelte";
 
 // register your slides
 export default [
