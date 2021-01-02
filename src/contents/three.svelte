@@ -25,7 +25,7 @@
 
 <div
    in:fly|local={{ x: 900, duration: 500 }}
-   out:fly|local={{ x: -900, duration: 400 }}>
+   out:fly|local={{ x: -900, duration: 500 }}>
    <img src="/img/vue.png" alt="vuejs" />
    <p>The Progressive JavaScript Framework</p>
 </div>

@@ -1,6 +1,18 @@
 <script>
    import slides from "../slide/slides";
-   import { currentSlide } from "../store";
+   import { currentSlide, showMenus } from "../store";
+
+   function changeSlide(event) {
+      if (event.key === "ArrowRight" && $currentSlide !== slides.length) {
+         $showMenus = false;
+         $currentSlide += 1;
+      }
+
+      if (event.key === "ArrowLeft" && $currentSlide !== 1) {
+         $showMenus = false;
+         $currentSlide -= 1;
+      }
+   }
 
    $: content = slides[$currentSlide - 1].slide;
 </script>
@@ -20,3 +32,5 @@
 <div class="container">
    <svelte:component this={content} />
 </div>
+
+<svelte:body on:keydown={changeSlide} />

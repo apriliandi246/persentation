@@ -3,7 +3,7 @@
 </script>
 
 <style>
-   .container {
+   div {
       display: flex;
       align-items: center;
       justify-content: space-around;
@@ -17,9 +17,8 @@
 </style>
 
 <div
-   class="container"
    in:fly|local={{ x: 900, duration: 500 }}
-   out:fly|local={{ x: -900, duration: 300 }}>
+   out:fly|local={{ x: -900, duration: 500 }}>
    <h1>Which one</h1>
    <h1>❓</h1>
 </div>

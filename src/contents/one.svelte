@@ -28,7 +28,7 @@
 
 <div
    in:fly|local={{ x: 900, duration: 500 }}
-   out:fly|local={{ x: -900, duration: 300 }}>
+   out:fly|local={{ x: -900, duration: 500 }}>
    <img src="/img/svelte.png" alt="sveltejs" />
    <p>
       Svelte is a radical new approach to building user interfaces. Whereas

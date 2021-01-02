@@ -13,55 +13,31 @@
 </script>
 
 <style>
-   .menu-toggle {
-      top: 0;
-      z-index: 99;
-      padding: 10px;
-      margin-top: 20px;
-      margin-left: 30px;
+   .menus {
+      top: 25px;
+      left: 30px;
+      z-index: 999;
       position: absolute;
-      text-align: center;
-      border-radius: 3px;
-      transition: padding-left 0.2s;
    }
 
-   .toggle-menu {
+   .menus__blocks {
       height: 20px;
       display: flex;
-      position: relative;
+      cursor: pointer;
       flex-direction: column;
-      transition: transform 0.1s;
       justify-content: space-between;
    }
 
-   .toggle-menu__trigger {
-      top: -7px;
-      opacity: 0;
-      z-index: 2;
-      left: -11px;
-      width: 42px;
-      height: 27px;
-      cursor: pointer;
-      position: absolute;
-   }
-
-   .toggle-menu__block {
+   .menus__block {
       width: 28px;
       height: 3px;
-      display: block;
-      transition: all 0.3s;
+      display: inline-block;
       background-color: #3b3737;
    }
 
-   .menus {
-      top: 0;
-      left: 0;
-      z-index: 99;
+   .menus__menu {
       width: 250px;
-      margin-top: 80px;
-      margin-left: 30px;
-      position: absolute;
-      border-radius: 3px;
+      margin-top: 22px;
       box-shadow: 0 0 1px 1px #0000001a;
    }
 
@@ -69,11 +45,10 @@
       width: 100%;
       border: none;
       outline: none;
-      padding: 12px;
+      padding: 10px;
       color: #000000;
       cursor: pointer;
       font-size: 1rem;
-      border-radius: 2px;
       -moz-appearance: none;
       letter-spacing: 1.2px;
       box-sizing: border-box;
@@ -81,10 +56,6 @@
       -webkit-appearance: none;
       background-color: #fafafa;
       transition: background-color 0.2s;
-   }
-
-   option {
-      font-family: system-ui;
    }
 
    select:hover {
@@ -97,37 +68,32 @@
    }
 </style>
 
-<div class="menu-toggle">
-   <div class="toggle-menu">
-      <input
-         type="checkbox"
-         on:change={toogleMenu}
-         class="toggle-menu__trigger" />
-
-      <span class="toggle-menu__block" />
-      <span class="toggle-menu__block" />
-      <span class="toggle-menu__block" />
+<div class="menus">
+   <div class="menus__blocks" on:click={toogleMenu}>
+      <span class="menus__block" />
+      <span class="menus__block" />
+      <span class="menus__block" />
    </div>
+
+   {#if $showMenus === true}
+      <div
+         class="menus__menu"
+         in:scale={{ duration: 300 }}
+         out:scale={{ duration: 300 }}>
+         <!-- svelte-ignore a11y-no-onchange -->
+         <select on:change={chooseSlide}>
+            <option selected hidden>Choose Your Slide</option>
+
+            {#each slides as slide}
+               <option
+                  value={slide.id}
+                  selected={slide.id === $currentSlide}
+                  class:curSlide={slide.id === $currentSlide}>
+                  Slide
+                  {slide.id}
+               </option>
+            {/each}
+         </select>
+      </div>
+   {/if}
 </div>
-
-{#if $showMenus === true}
-   <div
-      class="menus"
-      in:scale={{ duration: 300 }}
-      out:scale={{ duration: 300 }}>
-      <!-- svelte-ignore a11y-no-onchange -->
-      <select on:change={chooseSlide}>
-         <option selected hidden>Choose Your Slide</option>
-
-         {#each slides as slide}
-            <option
-               value={slide.id}
-               selected={slide.id === $currentSlide}
-               class:curSlide={slide.id === $currentSlide}>
-               Slide
-               {slide.id}
-            </option>
-         {/each}
-      </select>
-   </div>
-{/if}

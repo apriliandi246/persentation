@@ -1,5 +1,5 @@
 <script>
-   import { scale, fly } from "svelte/transition";
+   import { fly } from "svelte/transition";
 </script>
 
 <style>
@@ -24,7 +24,7 @@
 
 <div
    in:fly|local={{ x: 900, duration: 500 }}
-   out:fly|local={{ x: -900, duration: 400 }}>
+   out:fly|local={{ x: -900, duration: 500 }}>
    <img src="/img/react.png" alt="reactjs" />
    <p>A JavaScript library for building user interfaces</p>
 </div>
