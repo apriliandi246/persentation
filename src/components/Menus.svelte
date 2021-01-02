@@ -1,12 +1,10 @@
 <script>
    import slides from "../slide/slides";
-   import { currentSlide } from "../store";
+   import { currentSlide, showMenus } from "../store";
    import { scale } from "svelte/transition";
 
-   let showMenus = false;
-
    function toogleMenu() {
-      showMenus = !showMenus;
+      $showMenus = !$showMenus;
    }
 
    function chooseSlide(event) {
@@ -24,9 +22,7 @@
       position: absolute;
       text-align: center;
       border-radius: 3px;
-      background-color: #fafafa;
       transition: padding-left 0.2s;
-      box-shadow: 0 0 1.3px 1.3px #0000001a;
    }
 
    .toggle-menu {
@@ -55,31 +51,6 @@
       display: block;
       transition: all 0.3s;
       background-color: #3b3737;
-   }
-
-   .toggle-menu__block:nth-child(2) {
-      transform-origin: 0 0;
-   }
-
-   .toggle-menu__block:nth-child(4) {
-      transform-origin: 0 100%;
-   }
-
-   .toggle-menu__trigger:checked ~ .toggle-menu__block:nth-child(2) {
-      transform: rotate(45deg) translate(1px, -1px);
-   }
-
-   .toggle-menu__trigger:checked ~ .toggle-menu__block:nth-child(3) {
-      opacity: 0;
-      transform: scale(0);
-   }
-
-   .toggle-menu__trigger:checked ~ .toggle-menu__block:nth-child(4) {
-      transform: rotate(-45deg) translate(-1px, 1px);
-   }
-
-   .space {
-      padding-left: 18.5px;
    }
 
    .menus {
@@ -126,7 +97,7 @@
    }
 </style>
 
-<div class="menu-toggle" class:space={showMenus === true}>
+<div class="menu-toggle">
    <div class="toggle-menu">
       <input
          type="checkbox"
@@ -139,7 +110,7 @@
    </div>
 </div>
 
-{#if showMenus === true}
+{#if $showMenus === true}
    <div
       class="menus"
       in:scale={{ duration: 300 }}
@@ -150,8 +121,8 @@
 
          {#each slides as slide}
             <option
-               selected={slide.id === $currentSlide}
                value={slide.id}
+               selected={slide.id === $currentSlide}
                class:curSlide={slide.id === $currentSlide}>
                Slide
                {slide.id}
