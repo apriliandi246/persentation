@@ -1,14 +1,20 @@
 <script>
+   import links from "../slide/links";
    import slides from "../slide/slides";
-   import { currentSlide, showMenus } from "../store";
    import { scale } from "svelte/transition";
+   import { currentSlide, showMenus, showLinks } from "../store";
 
    function toogleMenu() {
+      $showLinks = false;
       $showMenus = !$showMenus;
    }
 
    function chooseSlide(event) {
       $currentSlide = parseInt(event.target.value);
+   }
+
+   function showListOfLinks() {
+      $showLinks = !$showLinks;
    }
 </script>
 
@@ -21,7 +27,7 @@
    }
 
    .menus__blocks {
-      height: 20px;
+      height: 24px;
       display: flex;
       cursor: pointer;
       flex-direction: column;
@@ -29,8 +35,8 @@
    }
 
    .menus__block {
-      width: 28px;
-      height: 3px;
+      height: 4px;
+      width: 31.4px;
       display: inline-block;
       background-color: #3b3737;
    }
@@ -41,11 +47,12 @@
       box-shadow: 0 0 1px 1px #0000001a;
    }
 
-   select {
+   select,
+   .menus__links {
       width: 100%;
       border: none;
       outline: none;
-      padding: 10px;
+      padding: 11px;
       color: #000000;
       cursor: pointer;
       font-size: 1rem;
@@ -58,13 +65,50 @@
       transition: background-color 0.2s;
    }
 
-   select:hover {
+   .linksActive,
+   select:hover,
+   .menus__links:hover {
       background-color: #f7efef;
    }
 
    .curSlide {
       font-weight: bold;
       background-color: #d8d2c9;
+   }
+
+   .menus__links {
+      display: flex;
+      justify-content: space-between;
+   }
+
+   .list-links {
+      top: 88px;
+      left: 270px;
+      display: flex;
+      padding: 14px;
+      color: #000000;
+      position: absolute;
+      flex-direction: column;
+      background-color: #fafafa;
+      box-shadow: 0 0 1px 1px #0000001a;
+   }
+
+   .list-links a {
+      color: #000000;
+      line-height: 26px;
+      margin-bottom: 8px;
+      text-decoration: none;
+      letter-spacing: 1.7px;
+   }
+
+   .list-links a:hover,
+   .list-links a:focus {
+      color: #0000ff;
+      text-decoration: underline;
+   }
+
+   .list-links a:last-child {
+      margin-bottom: 0;
    }
 </style>
 
@@ -75,11 +119,11 @@
       <span class="menus__block" />
    </div>
 
-   {#if $showMenus === true}
+   {#if $showMenus}
       <div
          class="menus__menu"
-         in:scale={{ duration: 300 }}
-         out:scale={{ duration: 300 }}>
+         in:scale={{ duration: 250 }}
+         out:scale={{ duration: 250 }}>
          <!-- svelte-ignore a11y-no-onchange -->
          <select on:change={chooseSlide}>
             <option selected hidden>Choose Your Slide</option>
@@ -94,6 +138,25 @@
                </option>
             {/each}
          </select>
+
+         <div
+            class="menus__links"
+            on:click={showListOfLinks}
+            class:linksActive={$showLinks === true}>
+            <p>Links</p>
+            <span>▶</span>
+         </div>
+      </div>
+   {/if}
+
+   {#if $showLinks}
+      <div
+         class="list-links"
+         in:scale={{ duration: 250 }}
+         out:scale={{ duration: 250 }}>
+         {#each links as link}
+            <a href={link} target="_blank" rel="noopener">{link}</a>
+         {/each}
       </div>
    {/if}
 </div>
