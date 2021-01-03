@@ -2,6 +2,7 @@
    import links from "../slide/links";
    import slides from "../slide/slides";
    import { scale } from "svelte/transition";
+   import { cubicInOut } from "svelte/easing";
    import { currentSlide, showMenus, showLinks } from "../store";
 
    function toogleMenu() {
@@ -19,6 +20,11 @@
 </script>
 
 <style>
+   :root {
+      --fontFamily: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+         Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+   }
+
    .menus {
       top: 25px;
       left: 30px;
@@ -59,10 +65,14 @@
       -moz-appearance: none;
       letter-spacing: 1.2px;
       box-sizing: border-box;
-      font-family: system-ui;
       -webkit-appearance: none;
       background-color: #fafafa;
+      font-family: var(--fontFamily);
       transition: background-color 0.2s;
+   }
+
+   .menus__links p {
+      font-family: var(--fontFamily);
    }
 
    .linksActive,
@@ -82,8 +92,8 @@
    }
 
    .list-links {
-      top: 88px;
-      left: 270px;
+      top: 140px;
+      left: 250px;
       display: flex;
       padding: 14px;
       color: #000000;
@@ -99,6 +109,7 @@
       margin-bottom: 8px;
       text-decoration: none;
       letter-spacing: 1.7px;
+      font-family: var(--fontFamily);
    }
 
    .list-links a:hover,
@@ -122,8 +133,8 @@
    {#if $showMenus}
       <div
          class="menus__menu"
-         in:scale={{ duration: 250 }}
-         out:scale={{ duration: 250 }}>
+         in:scale={{ duration: 200, easing: cubicInOut }}
+         out:scale={{ duration: 200, easing: cubicInOut }}>
          <!-- svelte-ignore a11y-no-onchange -->
          <select on:change={chooseSlide}>
             <option selected hidden>Choose Your Slide</option>
@@ -142,9 +153,9 @@
          <div
             class="menus__links"
             on:click={showListOfLinks}
-            class:linksActive={$showLinks === true}>
+            class:linksActive={$showLinks}>
             <p>Links</p>
-            <span>▶</span>
+            <span>{$showLinks ? '▼' : '▶'}</span>
          </div>
       </div>
    {/if}
@@ -152,8 +163,8 @@
    {#if $showLinks}
       <div
          class="list-links"
-         in:scale={{ duration: 250 }}
-         out:scale={{ duration: 250 }}>
+         in:scale={{ duration: 200, easing: cubicInOut }}
+         out:scale={{ duration: 200, easing: cubicInOut }}>
          {#each links as link}
             <a href={link} target="_blank" rel="noopener">{link}</a>
          {/each}
