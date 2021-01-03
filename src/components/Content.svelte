@@ -1,6 +1,6 @@
 <script>
    import slides from "../slide/slides";
-   import { currentSlide, showMenus, showLinks } from "../store";
+   import { currentSlide, showMenus, showLinks } from "../store/slide";
 
    function changeSlide(event) {
       if (event.key === "ArrowRight" && $currentSlide !== slides.length) {

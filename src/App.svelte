@@ -1,5 +1,5 @@
 <script>
-   import { currentSlide } from "./store";
+   import { currentSlide } from "./store/slide";
    import Menus from "./components/Menus.svelte";
    import Content from "./components/Content.svelte";
 </script>

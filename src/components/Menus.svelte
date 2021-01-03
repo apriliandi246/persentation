@@ -1,14 +1,10 @@
 <script>
-   import links from "../slide/links";
+   import Links from "./Links.svelte";
    import slides from "../slide/slides";
+   import { theme } from "../store/theme";
    import { scale } from "svelte/transition";
    import { cubicInOut } from "svelte/easing";
-   import { currentSlide, showMenus, showLinks, theme } from "../store";
-
-   function toogleMenu() {
-      $showLinks = false;
-      $showMenus = !$showMenus;
-   }
+   import { currentSlide, showMenus, showLinks } from "../store/slide";
 
    function chooseSlide(event) {
       $currentSlide = parseInt(event.target.value);
@@ -16,6 +12,11 @@
 
    function showListOfLinks() {
       $showLinks = !$showLinks;
+   }
+
+   function toogleMenu() {
+      $showLinks = false;
+      $showMenus = !$showMenus;
    }
 
    function toggleTheme() {
@@ -30,11 +31,6 @@
 </script>
 
 <style>
-   :root {
-      --fontFamily: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-         Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-   }
-
    .menus {
       top: 25px;
       left: 30px;
@@ -63,6 +59,17 @@
       box-shadow: 0 0 1px 1px #0000001a;
    }
 
+   .curSlide {
+      color: #ffffff;
+      font-weight: bold;
+      background-color: #ef482a;
+   }
+
+   .menus__links {
+      display: flex;
+      justify-content: space-between;
+   }
+
    select,
    .menus__links,
    .toggle-theme {
@@ -78,12 +85,7 @@
       box-sizing: border-box;
       -webkit-appearance: none;
       background-color: #fafafa;
-      font-family: var(--fontFamily);
       transition: background-color 0.2s;
-   }
-
-   .menus__links p {
-      font-family: var(--fontFamily);
    }
 
    select:hover,
@@ -93,46 +95,11 @@
       background-color: #f7efef;
    }
 
-   .curSlide {
-      color: #ffffff;
-      font-weight: bold;
-      background-color: #ef482a;
-   }
-
-   .menus__links {
-      display: flex;
-      justify-content: space-between;
-   }
-
-   .list-links {
-      top: 126px;
-      left: 280px;
-      display: flex;
-      padding: 14px;
-      color: #000000;
-      position: absolute;
-      flex-direction: column;
-      background-color: #fafafa;
-      box-shadow: 0 0 1px 1px #0000001a;
-   }
-
-   .list-links a {
-      color: #000000;
-      line-height: 26px;
-      margin-bottom: 8px;
-      text-decoration: none;
-      letter-spacing: 1.7px;
-      font-family: var(--fontFamily);
-   }
-
-   .list-links a:hover,
-   .list-links a:focus {
-      color: #0000ff;
-      text-decoration: underline;
-   }
-
-   .list-links a:last-child {
-      margin-bottom: 0;
+   select,
+   .menus__links,
+   .toggle-theme .menus__links p {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+         Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
    }
 </style>
 
@@ -178,13 +145,6 @@
    {/if}
 
    {#if $showLinks}
-      <div
-         class="list-links"
-         in:scale={{ duration: 200, easing: cubicInOut }}
-         out:scale={{ duration: 200, easing: cubicInOut }}>
-         {#each links as link}
-            <a href={link} target="_blank" rel="noopener">{link}</a>
-         {/each}
-      </div>
+      <Links />
    {/if}
 </div>
