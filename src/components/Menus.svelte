@@ -3,7 +3,7 @@
    import slides from "../slide/slides";
    import { scale } from "svelte/transition";
    import { cubicInOut } from "svelte/easing";
-   import { currentSlide, showMenus, showLinks } from "../store";
+   import { currentSlide, showMenus, showLinks, theme } from "../store";
 
    function toogleMenu() {
       $showLinks = false;
@@ -16,6 +16,16 @@
 
    function showListOfLinks() {
       $showLinks = !$showLinks;
+   }
+
+   function toggleTheme() {
+      if ($theme === "Light") {
+         $theme = "Dark";
+         localStorage.setItem("theme", "Dark");
+      } else {
+         $theme = "Light";
+         localStorage.setItem("theme", "Light");
+      }
    }
 </script>
 
@@ -44,7 +54,7 @@
       height: 4px;
       width: 31.4px;
       display: inline-block;
-      background-color: #3b3737;
+      background-color: #290606;
    }
 
    .menus__menu {
@@ -54,7 +64,8 @@
    }
 
    select,
-   .menus__links {
+   .menus__links,
+   .toggle-theme {
       width: 100%;
       border: none;
       outline: none;
@@ -75,15 +86,17 @@
       font-family: var(--fontFamily);
    }
 
-   .linksActive,
    select:hover,
-   .menus__links:hover {
+   .linksActive,
+   .menus__links:hover,
+   .toggle-theme:hover {
       background-color: #f7efef;
    }
 
    .curSlide {
+      color: #ffffff;
       font-weight: bold;
-      background-color: #d8d2c9;
+      background-color: #ef482a;
    }
 
    .menus__links {
@@ -92,8 +105,8 @@
    }
 
    .list-links {
-      top: 140px;
-      left: 250px;
+      top: 126px;
+      left: 280px;
       display: flex;
       padding: 14px;
       color: #000000;
@@ -135,6 +148,10 @@
          class="menus__menu"
          in:scale={{ duration: 200, easing: cubicInOut }}
          out:scale={{ duration: 200, easing: cubicInOut }}>
+         <p class="toggle-theme" on:click={toggleTheme}>
+            {$theme === 'Light' ? 'Light' : 'Dark'}
+         </p>
+
          <!-- svelte-ignore a11y-no-onchange -->
          <select on:change={chooseSlide}>
             <option selected hidden>Choose Your Slide</option>
