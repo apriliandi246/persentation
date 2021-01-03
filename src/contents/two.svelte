@@ -1,5 +1,6 @@
 <script>
    import { fly } from "svelte/transition";
+   import { cubicInOut } from "svelte/easing";
 </script>
 
 <style>
@@ -23,8 +24,8 @@
 </style>
 
 <div
-   in:fly|local={{ x: 900, duration: 500 }}
-   out:fly|local={{ x: -900, duration: 500 }}>
+   in:fly|local={{ x: 900, duration: 490 }}
+   out:fly|local={{ x: -900, duration: 490, easing: cubicInOut }}>
    <img src="/img/react.png" alt="reactjs" />
    <p>A JavaScript library for building user interfaces</p>
 </div>
