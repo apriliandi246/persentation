@@ -1,8 +1,10 @@
-<script>
+<script lang="ts">
    import slides from "../slide/slides";
    import { currentSlide, showMenus, showLinks } from "../store/slide";
 
-   function changeSlide(event) {
+   $: content = slides[$currentSlide - 1].slide;
+
+   function changeSlide(event: { key: string }) {
       if (event.key === "ArrowRight" && $currentSlide !== slides.length) {
          $showLinks = false;
          $showMenus = false;
@@ -15,8 +17,6 @@
          $currentSlide -= 1;
       }
    }
-
-   $: content = slides[$currentSlide - 1].slide;
 </script>
 
 <style>

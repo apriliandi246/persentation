@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
    import links from "../slide/links";
    import { scale } from "svelte/transition";
    import { cubicInOut } from "svelte/easing";

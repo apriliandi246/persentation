@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
    import { currentSlide } from "./store/slide";
    import Menus from "./components/Menus.svelte";
    import Content from "./components/Content.svelte";
