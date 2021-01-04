@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
    import Links from "./Links.svelte";
    import slides from "../slide/slides";
    import { theme } from "../store/theme";
@@ -6,8 +6,10 @@
    import { cubicInOut } from "svelte/easing";
    import { currentSlide, showMenus, showLinks } from "../store/slide";
 
-   function chooseSlide(event) {
-      $currentSlide = parseInt(event.target.value);
+   let selectValue: string = "1";
+
+   $: {
+      $currentSlide = parseInt(selectValue);
    }
 
    function showListOfLinks() {
@@ -120,7 +122,7 @@
          </p>
 
          <!-- svelte-ignore a11y-no-onchange -->
-         <select on:change={chooseSlide}>
+         <select bind:value={selectValue}>
             <option selected hidden>Choose Your Slide</option>
 
             {#each slides as slide}
