@@ -17,7 +17,18 @@
          $currentSlide -= 1;
       }
    }
+
+   function hideMenus() {
+      $showMenus = false;
+      $showLinks = false;
+   }
 </script>
+
+<div class="container" on:click={hideMenus}>
+   <svelte:component this={content} />
+</div>
+
+<svelte:body on:keydown={changeSlide} />
 
 <style>
    .container {
@@ -30,9 +41,3 @@
       justify-content: center;
    }
 </style>
-
-<div class="container">
-   <svelte:component this={content} />
-</div>
-
-<svelte:body on:keydown={changeSlide} />

@@ -3,7 +3,6 @@
    import slides from "../slide/slides";
    import { theme } from "../store/theme";
    import { scale } from "svelte/transition";
-   import { cubicInOut } from "svelte/easing";
    import { currentSlide, showMenus, showLinks } from "../store/slide";
 
    let selectValue: string = "1";
@@ -32,6 +31,94 @@
    }
 </script>
 
+<div class="menus">
+   <div class="menus__blocks" on:click={toogleMenu}>
+      <span class="menus__block" />
+      <span class="menus__block" />
+      <span class="menus__block" />
+   </div>
+
+   {#if $showMenus}
+      <div class="menus__menu" transition:scale={{ duration: 300 }}>
+         <p class="toggle-theme" on:click={toggleTheme}>
+            {$theme === "Light" ? "Light" : "Dark"}
+         </p>
+
+         <!-- svelte-ignore a11y-no-onchange -->
+         <select bind:value={selectValue}>
+            <option selected hidden>Choose Your Slide</option>
+
+            {#each slides as slide}
+               <option
+                  value={slide.id}
+                  selected={slide.id === $currentSlide}
+                  class:curSlide={slide.id === $currentSlide}
+               >
+                  Slide
+                  {slide.id}
+               </option>
+            {/each}
+         </select>
+
+         <div
+            class="menus__links"
+            on:click={showListOfLinks}
+            class:linksActive={$showLinks}
+         >
+            <p>Links</p>
+            <span>{$showLinks ? "▼" : "▶"}</span>
+         </div>
+      </div>
+   {/if}
+
+   {#if $showLinks}
+      <Links />
+   {/if}
+</div>
+
+<svelte:head>
+   <style>
+      body.dark-mode .menus__blocks .menus__block {
+         background-color: #ffffff;
+      }
+
+      body.dark-mode .menus__menu {
+         box-shadow: none;
+         border-radius: 3px;
+         border: 2px solid #273742;
+      }
+
+      body.dark-mode .menus__menu select,
+      body.dark-mode .menus__menu .menus__links,
+      body.dark-mode .menus__menu .toggle-theme {
+         color: #ffffff;
+         background-color: #192734;
+      }
+
+      body.dark-mode .menus__menu select option {
+         color: #ffffff;
+         background-color: #192734;
+      }
+
+      body.dark-mode .menus__menu select:hover,
+      body.dark-mode .menus__menu .menus__links:hover,
+      body.dark-mode .menus__menu .toggle-theme:hover {
+         background-color: inherit;
+      }
+
+      body.dark-mode .menus .list-links {
+         box-shadow: none;
+         border-radius: 3px;
+         border: 2px solid #273742;
+         background-color: #192734;
+      }
+
+      body.dark-mode .menus .list-links a {
+         color: #ffffff;
+      }
+   </style>
+</svelte:head>
+
 <style>
    .menus {
       top: 25px;
@@ -41,6 +128,7 @@
    }
 
    .menus__blocks {
+      width: 32px;
       height: 24px;
       display: flex;
       cursor: pointer;
@@ -50,7 +138,7 @@
 
    .menus__block {
       height: 4px;
-      width: 31.4px;
+      width: 100%;
       display: inline-block;
       background-color: #290606;
    }
@@ -100,53 +188,6 @@
    select,
    .menus__links,
    .toggle-theme .menus__links p {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-         Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      font-family: Ubuntu;
    }
 </style>
-
-<div class="menus">
-   <div class="menus__blocks" on:click={toogleMenu}>
-      <span class="menus__block" />
-      <span class="menus__block" />
-      <span class="menus__block" />
-   </div>
-
-   {#if $showMenus}
-      <div
-         class="menus__menu"
-         in:scale={{ duration: 200, easing: cubicInOut }}
-         out:scale={{ duration: 200, easing: cubicInOut }}>
-         <p class="toggle-theme" on:click={toggleTheme}>
-            {$theme === 'Light' ? 'Light' : 'Dark'}
-         </p>
-
-         <!-- svelte-ignore a11y-no-onchange -->
-         <select bind:value={selectValue}>
-            <option selected hidden>Choose Your Slide</option>
-
-            {#each slides as slide}
-               <option
-                  value={slide.id}
-                  selected={slide.id === $currentSlide}
-                  class:curSlide={slide.id === $currentSlide}>
-                  Slide
-                  {slide.id}
-               </option>
-            {/each}
-         </select>
-
-         <div
-            class="menus__links"
-            on:click={showListOfLinks}
-            class:linksActive={$showLinks}>
-            <p>Links</p>
-            <span>{$showLinks ? '▼' : '▶'}</span>
-         </div>
-      </div>
-   {/if}
-
-   {#if $showLinks}
-      <Links />
-   {/if}
-</div>
