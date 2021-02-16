@@ -2,7 +2,7 @@
    import Links from "./Links.svelte";
    import slides from "../slide/slides";
    import { theme } from "../store/theme";
-   import { scale } from "svelte/transition";
+   import { scale, fade } from "svelte/transition";
    import { currentSlide, showMenus, showLinks } from "../store/slide";
 
    let selectValue: string = "1";
@@ -39,11 +39,11 @@
    </div>
 
    {#if $showMenus}
-      <div class="menus__menu" transition:scale={{ duration: 300 }}>
-         <p class="toggle-theme" on:click={toggleTheme}>
-            {$theme === "Light" ? "Light" : "Dark"}
-         </p>
-
+      <div
+         class="menus__menu"
+         in:scale={{ duration: 250 }}
+         out:fade={{ duration: 120 }}
+      >
          <!-- svelte-ignore a11y-no-onchange -->
          <select bind:value={selectValue}>
             <option selected hidden>Choose Your Slide</option>
@@ -68,6 +68,10 @@
             <p>Links</p>
             <span>{$showLinks ? "▼" : "▶"}</span>
          </div>
+
+         <p class="toggle-theme" on:click={toggleTheme}>
+            {$theme === "Light" ? "Light Mode" : "Dark Mode"}
+         </p>
       </div>
    {/if}
 
@@ -78,51 +82,43 @@
 
 <svelte:head>
    <style>
-      body.dark-mode .menus__blocks .menus__block {
+      #dark-mode .menus__blocks .menus__block {
          background-color: #ffffff;
       }
 
-      body.dark-mode .menus__menu {
-         box-shadow: none;
-         border-radius: 3px;
-         border: 2px solid #273742;
+      #dark-mode .menus__menu select,
+      #dark-mode .menus__menu .menus__links,
+      #dark-mode .menus__menu .toggle-theme {
+         color: #ffffff;
+         background-color: #131c25;
       }
 
-      body.dark-mode .menus__menu select,
-      body.dark-mode .menus__menu .menus__links,
-      body.dark-mode .menus__menu .toggle-theme {
+      #dark-mode .menus .menus__menu {
+         border: 3px solid #2a3e4b;
+         box-shadow: 8px 8px 1px 1px #2a3e4b;
+      }
+
+      #dark-mode .menus__menu select option {
          color: #ffffff;
          background-color: #192734;
       }
 
-      body.dark-mode .menus__menu select option {
-         color: #ffffff;
+      #dark-mode .menus__menu select:hover,
+      #dark-mode .menus__menu .menus__links:hover,
+      #dark-mode .menus__menu .toggle-theme:hover {
          background-color: #192734;
       }
 
-      body.dark-mode .menus__menu select:hover,
-      body.dark-mode .menus__menu .menus__links:hover,
-      body.dark-mode .menus__menu .toggle-theme:hover {
-         background-color: inherit;
-      }
-
-      body.dark-mode .menus .list-links {
-         box-shadow: none;
-         border-radius: 3px;
-         border: 2px solid #273742;
-         background-color: #192734;
-      }
-
-      body.dark-mode .menus .list-links a {
-         color: #ffffff;
+      #dark-mode .menus .curSlide {
+         background-color: #ef482a;
       }
    </style>
 </svelte:head>
 
 <style>
    .menus {
-      top: 25px;
-      left: 30px;
+      top: 30px;
+      left: 40px;
       z-index: 999;
       position: absolute;
    }
@@ -146,7 +142,9 @@
    .menus__menu {
       width: 250px;
       margin-top: 22px;
-      box-shadow: 0 0 1px 1px #0000001a;
+      border-radius: 3px;
+      border: 3px solid #b8bec5;
+      box-shadow: 8px 8px 1px 1px #b8bec5;
    }
 
    .curSlide {
@@ -174,7 +172,7 @@
       letter-spacing: 1.2px;
       box-sizing: border-box;
       -webkit-appearance: none;
-      background-color: #fafafa;
+      background-color: #ffffff;
       transition: background-color 0.2s;
    }
 

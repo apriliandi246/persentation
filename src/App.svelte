@@ -11,12 +11,12 @@
 
 <svelte:head>
    <style>
-      .dark-mode {
+      #dark-mode {
          background-color: #131c25;
       }
 
-      body.dark-mode p,
-      body.dark-mode h1 {
+      #dark-mode p,
+      #dark-mode h1 {
          color: #ffffff;
       }
    </style>

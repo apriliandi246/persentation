@@ -11,9 +11,9 @@ if (typeof window !== "undefined") {
 theme.subscribe((val) => {
    if (typeof window !== "undefined") {
       if (val === "Dark") {
-         window.document.body.classList.add("dark-mode");
+         document.body.setAttribute("id", "dark-mode");
       } else {
-         window.document.body.classList.remove("dark-mode");
+         document.body.removeAttribute("id");
       }
    }
 });
